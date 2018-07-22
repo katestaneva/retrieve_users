@@ -1,0 +1,15 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}File:
+${licensePrefix}
+${licensePrefix}PHP: v5.6
+${licensePrefix}
+${licensePrefix}Description:
+${licensePrefix}
+${licensePrefix}Author: Ekaterina Staneva
+${licensePrefix}
+${licensePrefix}Git: git link...
+<#if licenseLast??>
+${licenseLast}
+</#if>
