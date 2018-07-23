@@ -14,11 +14,15 @@
 
   header('Access-Control-Allow-Origin: *');
   header('Content-Type: application/json');
+  
+  //no AUTH yet..
+  
   include_once '../core/usersModel.php';
   
-  // Instantiate and connect
   $db = new usersModel();
   $users = $db->select();
+  
+  //pagination goes here
   
   if($users->rowCount()){
         $users_arr = array();
