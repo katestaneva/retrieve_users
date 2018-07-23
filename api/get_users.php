@@ -1,15 +1,15 @@
 <?php
 
 /* 
- * File:
+ * File: api/get_users.php
  * 
  * PHP: v5.6
  * 
- * Description:
+ * Description: exposing endpoint for selecting users
  * 
  * Author: Ekaterina Staneva
  * 
- * Git: git link...
+ * Git: https://github.com/katestaneva/users_RESTA_API.git
  */
 
   header('Access-Control-Allow-Origin: *');

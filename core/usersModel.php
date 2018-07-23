@@ -8,7 +8,7 @@
  * 
  * Author: Ekaterina Staneva
  * 
- * Git: git link...
+ * Git:  https://github.com/katestaneva/users_RESTA_API.git
  */
     class UsersModel extends baseModel {
         private $tableName = "users";
