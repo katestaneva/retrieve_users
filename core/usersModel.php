@@ -37,9 +37,7 @@
             
             //DEBUG
             $exec->debugDumpParams();
-            
-            $data = $exec->fetchAll(PDO::FETCH_ASSOC);
-            return $data;
+            return $exec;
         }
         
         public function selectSingle($id){
@@ -55,12 +53,10 @@
                 $id = $this->sanitizeInput($id);
                 $exec->bindParam(':id', $id);
                 $exec->execute();
-                $data = $exec->fetchAll(PDO::FETCH_ASSOC);
-
                 //DEBUG
                 $exec->debugDumpParams();
 
-                return $data;   
+                return $exec;   
             }else{
                 echo("DB Error: id variable malformated.");
                 return false;
@@ -89,8 +85,7 @@
                 //DEBUG
                 $exec->debugDumpParams();
 
-                $data = $exec->fetchAll(PDO::FETCH_ASSOC);
-                return $data;
+                return $exec;
             }else{
                 echo("DB Error: range variable malformated.");
                 return false;
