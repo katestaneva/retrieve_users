@@ -1,0 +1,16 @@
+
+<IfModule mod_rewrite.so>
+ RewriteEngine On
+ Options +FollowSymLinks
+ RewriteRule ^api/get_user/([0-9]+)/?$ api/get_user.php?id=$1 [NC,L]
+ RewriteRule ^api/get_users$ api/get_users.php/$1 [NC,QSA]
+ RewriteRule ^api/get_users/([0-9]+)/?$ api/get_users.php?limit=$1 [NC,L]
+ RewriteRule ^api/get_users/([0-9]+)/([0-9]+)$ api/get_users.php?rangeStart=$1&rangeEnd=$2
+ RewriteRule ^api/insert_user/([^/]*)/?$ api/insert_user.php?username=$1 [NC,L]
+ RewriteRule ^api/update_user/([^/]*)/([^/]*)?$ api/update_user.php?id=$1&username=$2 [NC,L]
+ RewriteRule ^api/delete_user/([0-9]+)/?$ api/delete_user.php?id=$1 [NC,L]
+</IfModule>
+
+
+
+

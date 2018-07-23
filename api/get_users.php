@@ -12,17 +12,24 @@
  * Git: https://github.com/katestaneva/users_RESTA_API.git
  */
 
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: GET');
+header('Access-Control-Allow-Headers: Access-Control-Allow-Headers,Content-Type,Access-Control-Allow-Methods, Authorization, X-Requested-With');
+
   
   //no AUTH yet..
   
   include_once '../core/usersModel.php';
   
   $db = new usersModel();
-  $users = $db->select();
-  
-  //pagination goes here
+  if (isset($_GET["limit"])){
+    $users = $db->select($_GET["limit"]);
+  }elseif(isset($_GET["startRange"]) && isset($_GET["endRange"])){
+    $users = $db->selectRange($_GET["startRange"], $_GET["endRange"]);  
+  }else{
+    $users = $db->select();
+  }
   
   if($users->rowCount()){
         $users_arr = array();

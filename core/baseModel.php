@@ -39,9 +39,9 @@
         }
         
         abstract protected function select();
-        abstract protected function insert();
-        abstract protected function update();
-        abstract protected function delete();
+        abstract protected function insert($data);
+        abstract protected function update($id, $data);
+        abstract protected function delete($id);
         
         protected function sanitizeInput($input){
             if(!empty($input)){

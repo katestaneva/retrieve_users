@@ -10,6 +10,7 @@
  * 
  * Git:  https://github.com/katestaneva/users_RESTA_API.git
  */
+    include_once 'BaseModel.php';
     class UsersModel extends baseModel {
         private $tableName = "users";
         function __construct(){
@@ -20,7 +21,7 @@
             $sql = "SELECT * FROM ".$this->tableName;
             
             if($limit != ""){
-                if($limit > 0 && is_int($limit) ){
+                if($limit >= 0 && is_numeric($limit) ){
                     $sql .= " LIMIT :limit";
                     $exec = $this->pdo->prepare($sql);
                     $limit = $this->sanitizeInput($limit);
@@ -41,7 +42,7 @@
         }
         
         public function selectSingle($id){
-            if(!empty($id) && $id > 0 && is_int($id) ){
+            if(isset($id) && $id >= 0 && is_numeric($id) ){
                 $sql = "SELECT  
                 u.username as name, 
                 u.updated_at as last_modified,
@@ -63,10 +64,9 @@
             }
         }
         
-        public function selectRange($rangeStart, $rangeEnd){
-            if((!empty($rangeStart)  && !empty($rangeEnd)) && 
-               ($rangeStart > 0 && $rangeEnd > 0) && 
-               (is_int($rangeStart) && is_int($rangeEnd))){
+            public function selectRange($rangeStart, $rangeEnd){
+            if(($rangeStart >= 0 && $rangeEnd >= 0) && 
+               (is_numeric($rangeStart) && is_numeric($rangeEnd))){
                 
                 $sql = "SELECT  
                 u.username as name, 
@@ -97,9 +97,11 @@
             $sql =  
                "INSERT INTO " .$this->tableName. "
                 (`id`, `username`, `updated_at`, `created_at`)
-                VALUES ('',:username,'',".$currentTime.")";
-
+                VALUES ('',:username,'','".$currentTime."')";
+  
             $exec = $this->pdo->prepare($sql);
+            
+            $exec->debugDumpParams();
             $username = $this->sanitizeInput($username);
             $exec->bindParam(':username', $username);
 
@@ -112,7 +114,7 @@
         }
         
         public function update($id,$username){
-            if(!empty($id) && $id > 0 && is_int($id) ){
+            if($id >= 0 && is_numeric($id) ){
                 $sql = " UPDATE " .$this->tableName. "
                 SET username=:username WHERE id = :id";
                 
@@ -135,7 +137,7 @@
         }
         
         public function delete($id){
-            if(!empty($id) && $id > 0 && is_int($id) ){
+            if( $id >= 0 && is_numeric($id) ){
                 $sql = " DELETE FROM " .$this->tableName. "
                    WHERE id = :id";
                 $exec = $this->pdo->prepare($sql);
